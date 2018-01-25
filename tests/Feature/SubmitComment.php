@@ -16,9 +16,9 @@ class SubmitComment extends TestCase
     public function test_user_can_submit_comment()
     {
         // Given a Guest
-        $user = factory('App\User')->create();
+        $guest = factory('App\User')->create();
           // make guest to Authenticate user
-        //$user = $this->be($guest);
+        $user = $this->be($guest);
          // And Post is exist
         $post = factory('App\Post')->create();
         // And Giving comment object 

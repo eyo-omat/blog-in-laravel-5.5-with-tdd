@@ -17,8 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('/post','PostsController@store');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/blog/{post}/comment','CommentController@store')->name('addcomment');
+Route::group(['middleware' => ['auth']], function () {
+    Route::post('/blog/{post}/comment','CommentController@store')->name('addcomment');
+});
 
 Route::get('/blog','PostsController@index')->name('blog');
 Route::get('/blog/{post}','PostsController@show');

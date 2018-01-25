@@ -20,4 +20,14 @@ class PostsController extends Controller
         return view('post.show')->with(['post'=>$post]);
     }
     
+    public function store(Request $request){
+       $post = Post::create([
+            'user_id'=>auth()->id(),
+            'title'  =>$request->title,
+            'body'   =>$request->body
+            
+        ]);
+     return redirect('/blog/'.$post->id);
+    }
+    
 }
