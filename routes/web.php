@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::view('/blog/create','post.create')->middleware('auth');
 Route::post('/post','PostsController@store');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth']], function () {

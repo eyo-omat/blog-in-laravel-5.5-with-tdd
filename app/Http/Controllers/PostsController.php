@@ -7,6 +7,9 @@ Use App\Post;
 
 class PostsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth')->only('store');         
+    }
     
     public function index(Post $post){ // inject Post Model
         // query sort by created_at desc

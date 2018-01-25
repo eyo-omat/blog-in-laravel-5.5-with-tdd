@@ -28,4 +28,20 @@ class CreatePostTest extends TestCase
          // Then their should see post 
         $response->assertSee($post->title);
     }
+    
+    public function test_a_guest_can_not_create_post(){
+        $this->withoutExceptionHandling(); 
+        // expect thrown exception
+        $this->expectException('Illuminate\Auth\AuthenticationException');
+         // Given a Guest
+        $guest = factory('App\User')->create();
+          // And Giving Post object 
+        $post = factory('App\Post')->make();
+         // When the user create Post
+        $this->post('/post', $post->toArray());
+    }
+
+    public function test_a_guest_can_not_access_create_post_page(){
+        $this->get('/blog/create')->assertRedirect('/login');
+    }
 }
